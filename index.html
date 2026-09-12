@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CATFLIX</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#090909;color:#fff;font-family:Arial,sans-serif}
+nav{height:70px;background:#050505;display:flex;align-items:center;padding:0 5%;gap:28px;position:sticky;top:0;z-index:5}
+.logo{font-size:30px;font-weight:900;color:#e50914}nav a{color:#ddd;text-decoration:none;cursor:pointer}nav a:hover{color:#fff}
+.search{margin-left:auto;background:#222;border:1px solid #444;color:#fff;padding:10px 14px;border-radius:5px;width:220px}
+.hero{min-height:510px;padding:100px 7%;display:flex;align-items:center;background:linear-gradient(90deg,#090909 15%,#160d18 55%,#35131b 100%)}
+.hero div{max-width:650px}.tag{color:#ffd166;font-weight:bold}.hero h1{font-size:72px;margin:12px 0}.hero p{font-size:18px;line-height:1.6;color:#ccc}
+button{border:0;border-radius:5px;padding:12px 20px;font-weight:bold;cursor:pointer;margin-right:8px}.play{background:#fff}.info{background:#444;color:#fff}
+main{padding:30px 5% 70px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px}
+.card{background:#171717;border-radius:8px;overflow:hidden;cursor:pointer;transition:.2s}.card:hover{transform:scale(1.03)}
+.poster{height:260px;padding:15px;display:flex;align-items:flex-end;font-size:42px;font-weight:900;background:linear-gradient(135deg,var(--a),var(--b))}
+.body{padding:14px}.body h3{margin:0 0 7px}.meta{font-size:13px;color:#999}.badge{background:#e50914;padding:4px 7px;border-radius:3px;font-size:11px;font-weight:bold}
+footer{border-top:1px solid #222;padding:30px 5%;color:#777}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:10;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}
+.box{max-width:650px;width:100%;background:#181818;border-radius:10px;overflow:hidden}.mhead{height:230px;padding:25px;display:flex;align-items:end;font-size:50px;background:linear-gradient(135deg,#54256f,#111)}.close{margin-left:auto;align-self:flex-start;border-radius:50%;padding:7px 12px;background:#333;color:#fff}.content{padding:25px}
+@media(max-width:650px){nav a{display:none}.search{width:150px}.hero h1{font-size:48px}.hero{min-height:430px}}
+</style>
+</head>
+<body>
+<nav>
+ <div class="logo">CATFLIX</div>
+ <a onclick="show('all')">Home</a><a onclick="show('series')">Series</a><a onclick="show('movies')">Movies</a><a onclick="show('top')">🔥 Top 3</a>
+ <input class="search" id="q" placeholder="Search Catflix..." oninput="search()">
+</nav>
+<section class="hero"><div>
+ <div class="tag">CATFLIX ORIGINAL</div><h1>GRAVITY CATS</h1>
+ <p>Two kittens arrive in a mysterious town where strange things happen every day. Portals, monsters and one very suspicious triangular cat await.</p>
+ <button class="play" onclick="openMovie('Gravity Cats')">▶ WATCH NOW</button>
+ <button class="info" onclick="openMovie('Gravity Cats')">ⓘ MORE INFO</button>
+</div></section>
+<main><h2 id="title">🔥 Top 3 on Catflix</h2><div class="grid" id="grid"></div></main>
+<footer>© 2026 CATFLIX • Original parody universe 🐱</footer>
+<div class="modal" id="modal"><div class="box"><div class="mhead" id="mh">🐱<button class="close" onclick="closeModal()">×</button></div><div class="content"><h2 id="mn"></h2><p id="md"></p><p id="mm" class="meta"></p><button class="play" onclick="alert('The Catflix player is coming soon! 🐱🎬')">▶ PLAY</button></div></div></div>
+<script>
+const data=[
+{name:"Gravity Cats",type:"Series",genre:"Mystery • Comedy",emoji:"🐱🌀",a:"#503080",b:"#101a38",top:1,desc:"Dipper and Mabel Paws discover that their summer vacation in Gravity Cats is anything but normal."},
+{name:"Catformers",type:"Series",genre:"Action • Comedy",emoji:"🐱🤖",a:"#9a4c16",b:"#252525",top:2,desc:"Cats discover they can transform into absurd machines, creatures and sometimes sloths."},
+{name:"Jurassic Paws",type:"Series",genre:"Adventure • Comedy",emoji:"🐱🦖",a:"#23653a",b:"#101b10",top:3,desc:"A scientific experiment brings dinosaurs back—and the cats have to deal with them."},
+{name:"Stranger Paws",type:"Series",genre:"Mystery • Sci-Fi",emoji:"🐾👁️",a:"#8b1728",b:"#181818",desc:"A strange signal leads a group of kittens to a world hiding underneath their town."},
+{name:"Breaking Meow",type:"Series",genre:"Comedy • Crime",emoji:"🧪🐈",a:"#c28a18",b:"#263b18",desc:"A science teacher and his cat partner get into far more trouble than either expected."},
+{name:"Star Paws",type:"Series",genre:"Space • Adventure",emoji:"🚀🐱",a:"#162b75",b:"#080812",desc:"Rebel kittens face the Feline Empire and its terrifying laser pointer."},
+{name:"Ghostpaws",type:"Movie",genre:"Supernatural • Comedy",emoji:"👻🐾",a:"#4b3b79",b:"#121212",desc:"Three cats discover that their new house has some very unusual roommates."},
+{name:"Paw Heist",type:"Movie",genre:"Action • Comedy",emoji:"😼💰",a:"#176a58",b:"#151515",desc:"A team of cats plans the world's most ridiculous heist."}
+];
+function render(list){grid.innerHTML=list.map(t=>`<article class="card" onclick="openMovie('${t.name}')"><div class="poster" style="--a:${t.a};--b:${t.b}">${t.emoji}</div><div class="body">${t.top?`<span class="badge">TOP ${t.top}</span>`:''}<h3>${t.name}</h3><div class="meta">${t.type} • ${t.genre}</div></div></article>`).join('')}
+function show(x){q.value='';title.textContent=x==='top'?'🔥 Top 3 on Catflix':x==='series'?'📺 Series on Catflix':x==='movies'?'🎬 Movies on Catflix':'🔥 Top 3 on Catflix';render(x==='top'?data.filter(t=>t.top):x==='series'?data.filter(t=>t.type==='Series'):x==='movies'?data.filter(t=>t.type==='Movie'):data)}
+function search(){let s=q.value.toLowerCase();title.textContent=s?'🔎 Search results':'🔥 Top 3 on Catflix';render(s?data.filter(t=>(t.name+t.genre+t.desc).toLowerCase().includes(s)):data.filter(t=>t.top))}
+function openMovie(n){let t=data.find(x=>x.name===n);if(!t)return;mh.style.background=`linear-gradient(135deg,${t.a},${t.b})`;mh.firstChild.textContent=t.emoji;mn.textContent=t.name;md.textContent=t.desc;mm.textContent=`${t.type} • 2026 • ${t.genre}`;modal.classList.add('show')}
+function closeModal(){modal.classList.remove('show')}
+show('top');
+</script>
+</body>
+</html>
