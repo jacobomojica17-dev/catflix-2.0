@@ -40,7 +40,7 @@ footer{border-top:1px solid #222;padding:30px 5%;color:#777}
 <script>
 const data=[
 {name:"Gravity Cats",type:"Series",genre:"Mystery • Comedy",emoji:"🐱◬🎩",a:"#503080",b:"#101a38",top:1,desc:"Dipper and Mabel Paws discover that their summer vacation in Gravity Cats is anything but normal."},
-{name:"Catformers",type:"Movie",genre:"Action • Comedy",emoji:"🐱🤖",a:"#9a4c16",b:"#252525",top:2,desc:"Cats discover they can transform into absurd machines, creatures and sometimes sloths."},
+{name:"Catformers",type:"Movie",genre:"Action • Comedy",emoji:"🐱🤖",a:"#9a4c16",b:"#252525",desc:"Cats discover they can transform into absurd machines, creatures and sometimes sloths."},
 {name:"Jurassic Paws",type:"Movie",genre:"Adventure • Comedy",emoji:"🐱🦖",a:"#23653a",b:"#101b10",top:3,desc:"A scientific experiment brings dinosaurs back—and the cats have to deal with them."},
 {name:"Stranger Paws",type:"Series",genre:"Mystery • Sci-Fi",emoji:"🐾👁️",a:"#8b1728",b:"#181818",desc:"A strange signal leads a group of kittens to a world hiding underneath their town."},
 {name:"Breaking Meow",type:"Series",genre:"Comedy • Crime",emoji:"🧪🐈",a:"#c28a18",b:"#263b18",desc:"A science teacher and his cat partner get into far more trouble than either expected."},
@@ -48,7 +48,7 @@ const data=[
 {name:"Ghostpaws",type:"Movie",genre:"Supernatural • Comedy",emoji:"👻🐾",a:"#4b3b79",b:"#121212",desc:"Two cats discover that their new house has some very unusual roommates."},
 {name:"Paw Heist",type:"Movie",genre:"Action • Comedy",emoji:"😼💰",a:"#176a58",b:"#151515",desc:"A team of cats plans the world's most ridiculous heist."},
 {name:"Big Fat Meower",type:"Movie",genre:"Comedy • Adventure",emoji:"🐱🎬",a:"#8e2b2b",b:"#24120f",desc:"A young filmmaker discovers that a powerful entertainment executive has stolen his original cat-movie idea. He and his grumpy companion head to Hollywood to get his creation back."},
-{name:"SusPaws",type:"Series",genre:"Mystery • Comedy • Sci-Fi",emoji:"🐱🚀",a:"#b51f35",b:"#171717",top:3,desc:"A crew of cats and a very suspicious dog must complete their tasks aboard a spaceship while trying to figure out who the Impawster is."},
+{name:"SusPaws",type:"Series",genre:"Mystery • Comedy • Sci-Fi",emoji:"🐱🚀",a:"#b51f35",b:"#171717",top:2,desc:"A crew of cats and a very suspicious dog must complete their tasks aboard a spaceship while trying to figure out who the Impawster is."},
 ];
 function render(list){grid.innerHTML=list.map(t=>`<article class="card" onclick="openMovie('${t.name}')"><div class="poster" style="--a:${t.a};--b:${t.b}">${t.emoji}</div><div class="body">${t.top?`<span class="badge">TOP ${t.top}</span>`:''}<h3>${t.name}</h3><div class="meta">${t.type} • ${t.genre}</div></div></article>`).join('')}
 function show(x){q.value='';title.textContent=x==='top'?'🔥 Top 3 on Catflix':x==='series'?'📺 Series on Catflix':x==='movies'?'🎬 Movies on Catflix':'🔥 Top 3 on Catflix';render(x==='top'?data.filter(t=>t.top):x==='series'?data.filter(t=>t.type==='Series'):x==='movies'?data.filter(t=>t.type==='Movie'):data)}
