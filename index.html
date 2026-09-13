@@ -44,9 +44,10 @@ const data=[
 {name:"Jurassic Paws",type:"Series",genre:"Adventure • Comedy",emoji:"🐱🦖",a:"#23653a",b:"#101b10",top:3,desc:"A scientific experiment brings dinosaurs back—and the cats have to deal with them."},
 {name:"Stranger Paws",type:"Series",genre:"Mystery • Sci-Fi",emoji:"🐾👁️",a:"#8b1728",b:"#181818",desc:"A strange signal leads a group of kittens to a world hiding underneath their town."},
 {name:"Breaking Meow",type:"Series",genre:"Comedy • Crime",emoji:"🧪🐈",a:"#c28a18",b:"#263b18",desc:"A science teacher and his cat partner get into far more trouble than either expected."},
-{name:"Star Paws",type:"Series",genre:"Space • Adventure",emoji:"🚀🐱",a:"#162b75",b:"#080812",desc:"Rebel kittens face the Feline Empire and its terrifying laser pointer."},
+{name:"Star Paws",type:"Movie",genre:"Space • Adventure",emoji:"🚀🐱",a:"#162b75",b:"#080812",desc:"Rebel kittens face the Feline Empire and its terrifying laser pointer."},
 {name:"Ghostpaws",type:"Movie",genre:"Supernatural • Comedy",emoji:"👻🐾",a:"#4b3b79",b:"#121212",desc:"Three cats discover that their new house has some very unusual roommates."},
-{name:"Paw Heist",type:"Movie",genre:"Action • Comedy",emoji:"😼💰",a:"#176a58",b:"#151515",desc:"A team of cats plans the world's most ridiculous heist."}
+{name:"Paw Heist",type:"Movie",genre:"Action • Comedy",emoji:"😼💰",a:"#176a58",b:"#151515",desc:"A team of cats plans the world's most ridiculous heist."},
+{name:"Big Fat Meower",type:"Movie",genre:"Comedy • Adventure",emoji:"🐱🎬",a:"#8e2b2b",b:"#24120f",desc:"A young filmmaker discovers that a powerful entertainment executive has stolen his original cat-movie idea. He and his best friend head to Hollywood to get his creation back."},
 ];
 function render(list){grid.innerHTML=list.map(t=>`<article class="card" onclick="openMovie('${t.name}')"><div class="poster" style="--a:${t.a};--b:${t.b}">${t.emoji}</div><div class="body">${t.top?`<span class="badge">TOP ${t.top}</span>`:''}<h3>${t.name}</h3><div class="meta">${t.type} • ${t.genre}</div></div></article>`).join('')}
 function show(x){q.value='';title.textContent=x==='top'?'🔥 Top 3 on Catflix':x==='series'?'📺 Series on Catflix':x==='movies'?'🎬 Movies on Catflix':'🔥 Top 3 on Catflix';render(x==='top'?data.filter(t=>t.top):x==='series'?data.filter(t=>t.type==='Series'):x==='movies'?data.filter(t=>t.type==='Movie'):data)}
